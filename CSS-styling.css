@@ -4,7 +4,7 @@
             }
             #hist {
                 border: 1.5px dashed gray;
-                height: 2.4em;
+                height: 6.0em;
                 overflow-y: scroll;
                 resize: vertical;
                 min-height: 1.2em;
