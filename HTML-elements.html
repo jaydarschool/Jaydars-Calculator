@@ -20,3 +20,34 @@
         --->
         <meta charset="utf-8">
         <title>Jaydar's Calculator (V2.1)</title>
+        <!-- (The style tag and CSS goes here) --->
+    </head>
+    <body>
+    
+    
+    <label>What's the first number?
+    <input type = "number" id = "num1In" placeholder = "Input a number; ex. '22'">
+    </label>
+    
+    <br>
+    <label>What operation do you want to use?
+    <select id = "operIn">
+    <option value = "addit">Addition</option>
+    <option value = "subtr">Subtraction</option>
+    <option value = "multi">Multiplication</option>
+    <option value = "divis">Division</option>
+    </select>
+    </label>
+    
+    <br>
+    <label>What's the second number?
+    <input type = "number" id = "num2In" placeholder = "Input another one; ex. '42'">
+    </label>
+    <br>
+    <button id = "calcButton">Press To Calculate!</button>
+    <button id = "resButton">Reset</button>
+    <button id = "clearButton">Clear Problem</button>
+    <br><br>
+    <div id = "hist">Problem History: </div><br>
+    <span id = "probDiv">(Math Problem Goes Here...)</span>
+    <!-- (The script tag and DOM code goes here) --->
