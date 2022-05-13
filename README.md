@@ -17,4 +17,4 @@ Jaydar's Calculator is my basic, crappy calculator. It can add, subtract, multip
 ## Notes:
 - Just because I made a calculator, it doesn't mean I condone or encourage cheating in Math class.
 - Just like with FCC: DE on GitHub, there will most likely be formatting errors and stuff.
-- The different types of code are split up into different files.
+  - Also like FCC: DE, the code is split up into different files.
