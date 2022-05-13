@@ -1,0 +1,16 @@
+        <style>
+            body {
+                font-family: "Roboto", "Open Sans", sans-serif;
+            }
+            #hist {
+                border: 1.5px dashed gray;
+                height: 2.4em;
+                overflow-y: scroll;
+                resize: vertical;
+                min-height: 1.2em;
+                max-height: 12.5em;
+            }
+            #operIn, #calcButton, #resButton, #clearButton {
+                cursor: pointer;
+            }
+        </style>
