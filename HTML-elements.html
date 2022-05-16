@@ -2,7 +2,7 @@
 <html>
     <head>
         <!--
-        hey guys, your possibly local coding nerd, jaydar here
+        hey guys, your possibly local coding nerd, jaydar here.
         this time, i tried to make a calculator, granted it's very basic
         anyways, i started working on this to dip my toes into forms w/ DOM JS, by using many types of form inputs in one page, and then using them meaningfully, by calculating what you inputted.
         --->
@@ -17,39 +17,41 @@
         
         V2.1 (5-3-2022): A smaller update that added Problem History and a button to clear the problem displayed (no clear history button, cuz I'm too lazy).
         
+        V3.0.A (5-13-2022): A small update that cleaned(?) up the form processing code using jQuery. Part 1 of the Version 3.0.0 update.
+        
+        V3.0.B (5-16-2022): A medium-sized update that made the calculator look much better (I think so, at least.) Part 2 of the Version 3.0.0 update.
         --->
         <meta charset="utf-8">
         <title>Jaydar's Calculator (V2.1)</title>
-        <!-- (The style tag and CSS goes here) --->
-    </head>
+        <!-- (The style tag and CSS goes here) ---></head>
     <body>
     
-    
-    <label>What's the first number?
-    <input type = "number" id = "num1In" placeholder = "Input a number; ex. '22'">
+    <div id = "form-div">
+    <div id = "form-inputs"><label id = "num1Lbl">What's the first number?
+    <input type = "number" id = "num1In" placeholder = "Input a number">
     </label>
-    
     <br>
-    <label>What operation do you want to use?
+    <label id = "num2Lbl">What's the second number?
+    <input type = "number" id = "num2In" placeholder = "Input another number">
+    </label>
+    <br>
+    <label id = "operLbl">What operation do you want to use?
     <select id = "operIn">
     <option value = "addit">Addition</option>
     <option value = "subtr">Subtraction</option>
     <option value = "multi">Multiplication</option>
     <option value = "divis">Division</option>
     </select>
-    </label>
-    
-    <br>
-    <label>What's the second number?
-    <input type = "number" id = "num2In" placeholder = "Input another one; ex. '42'">
-    </label>
-    <br>
+    </label></div>
+    <div id = "form-buttons">
     <button id = "calcButton">Press To Calculate!</button>
     <button id = "resButton">Reset</button>
     <button id = "clearButton">Clear Problem</button>
-    <br><br>
-    <div id = "hist">Problem History: </div><br>
-    <span id = "probDiv">(Math Problem Goes Here...)</span>
+    </div></div>
+    <br>
+    <div id = "hist">Problem History: </div>
+    <div id = "probDiv">(Math Problem Goes Here...)<br></div>
+    
     <!-- (The script tag and jQuery code goes here) --->
     </body>
 </html>
