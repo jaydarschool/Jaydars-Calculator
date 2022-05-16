@@ -1,16 +1,48 @@
         <style>
             body {
                 font-family: "Roboto", "Open Sans", sans-serif;
+                background-color: rgb(214, 230, 228);
+            }
+            #form-inputs {
+                margin-bottom: 10px;
+            }
+            #form-inputs, #form-buttons {
+                border: 2px solid rgb(150, 145, 150);
+                padding: 5px;
+            }
+            #form-div {
+                border: 2px dotted rgb(41, 13, 166);
+                padding: 12.5px;
             }
             #hist {
                 border: 1.5px dashed gray;
                 height: 6.0em;
                 overflow-y: scroll;
-                resize: vertical;
+                resize: both;
                 min-height: 1.2em;
                 max-height: 12.5em;
+                background-color: rgb(201, 245, 243);
+                width: 50%;
+                float: right;
+                z-index: 2;
+                max-width: 75%;
+                min-width: 25%;
+                
+            }
+            #num1In, #num2In, #operIn, #calcButton, #resButton, #clearButton {
+                font-family: monospace;
             }
             #operIn, #calcButton, #resButton, #clearButton {
                 cursor: pointer;
+            }
+            #clearButton {
+                background-color: rgb(255, 41, 41);
+            }
+            #resButton {
+                background-color: rgb(255, 252, 97);
+            }
+            #probDiv {
+                background-color: white;
+                overflow-x: auto;
             }
         </style>
