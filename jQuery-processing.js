@@ -1,15 +1,16 @@
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         var $num1In = $("#num1In");
         var $operIn = $("#operIn");
         var $num2In = $("#num2In");
-        var $calcBtn = $("#calcButton");
+        var $form = $("#form-div");
         var $probTxt = $("#probDiv");
         var $resBtn = $("#resButton");
         var $histr = $("#hist");
         var $clrBtn = $("#clearButton");
         
         var onSub = function() { //this function estimates the problem
+            event.preventDefault();
             if (parseFloat($num1In.val()) === 0 || parseFloat($num2In.val()) === 0 && $operIn.val() === "divis") { //if the operation is division and you try to put in a 0 anywhere:
                 reset(); //reset the form
                 window.alert("Dividing with 0 doesn't work, nice try."); //give the user an error
@@ -58,7 +59,7 @@
             $probTxt.text("(Math Problem Goes Here...)");
         }
         
-        $calcBtn.on("click", onSub);
+        $form.on("submit", onSub);
         $resBtn.on("click", reset);
         $clrBtn.on("click", clear);
     </script>
