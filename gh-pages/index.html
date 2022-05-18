@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--
+        hey guys, your possibly local coding nerd, jaydar here.
+        this time, i tried to make a calculator, granted it's very basic
+        anyways, i started working on this to dip my toes into forms w/ DOM JS, by using many types of form inputs in one page, and then using them meaningfully, by calculating what you inputted.
+        --->
+        
+        <!--
+        
+            PATCH NOTES:
+        
+        V1.0 (4-27-2022): The broken, pointless, and buggy, original version
+        
+        V2.0 (5-2-2022): A huge update that actually made the calculator functional and stuff
+        
+        V2.1 (5-3-2022): A smaller update that added Problem History and a button to clear the problem displayed (no clear history button, cuz I'm too lazy).
+        
+        V3.0.A (5-13-2022): A small update that cleaned(?) up the form processing code using jQuery. Part 1 of the Version 3.0.0 update.
+        
+        V3.0.B (5-16-2022): A medium-sized update that made the calculator look much better (I think so, at least.) Part 2 of the Version 3.0.0 update.
+        
+        V3.0.C (5-16-2022): An update, smaller than a mouse, that made the form react to other FORMS (get it?) of submitting, such as pressing the ENTER key.
+        --->
+        <meta charset="utf-8">
+        <title>Jaydar's Calculator (V3.0.C)</title>
+        <style>
+            body {
+                font-family: "Roboto", "Open Sans", sans-serif;
+                background-color: rgb(214, 230, 228);
+            }
+            #form-inputs {
+                margin-bottom: 10px;
+            }
+            #form-inputs, #form-buttons {
+                border: 2px solid rgb(150, 145, 150);
+                padding: 5px;
+            }
+            #form-div {
+                border: 2px dotted rgb(41, 13, 166);
+                padding: 12.5px;
+            }
+            #hist {
+                border: 1.5px dashed gray;
+                height: 6.0em;
+                overflow-y: scroll;
+                resize: both;
+                min-height: 1.2em;
+                max-height: 12.5em;
+                background-color: rgb(201, 245, 243);
+                width: 50%;
+                float: right;
+                z-index: 2;
+                max-width: 75%;
+                min-width: 25%;
+                
+            }
+            #num1In, #num2In, #operIn, #calcButton, #resButton, #clearButton {
+                font-family: monospace;
+            }
+            #operIn, #calcButton, #resButton, #clearButton {
+                cursor: pointer;
+            }
+            #clearButton {
+                background-color: rgb(255, 41, 41);
+            }
+            #resButton {
+                background-color: rgb(255, 252, 97);
+            }
+            #probDiv {
+                background-color: white;
+                overflow-x: auto;
+            }
+        </style>
+    </head>
+    <body>
+    
+    <form id = "form-div">
+    <div id = "form-inputs"><label id = "num1Lbl">What's the first number?
+    <input type = "number" id = "num1In" placeholder = "Input a number">
+    </label>
+    <br>
+    <label id = "num2Lbl">What's the second number?
+    <input type = "number" id = "num2In" placeholder = "Input another number">
+    </label>
+    <br>
+    <label id = "operLbl">What operation do you want to use?
+    <select id = "operIn">
+    <option value = "addit">Addition</option>
+    <option value = "subtr">Subtraction</option>
+    <option value = "multi">Multiplication</option>
+    <option value = "divis">Division</option>
+    </select>
+    </label></div>
+    <div id = "form-buttons">
+    <button id = "calcButton">Press To Calculate!</button>
+    <button id = "resButton">Reset</button>
+    <button id = "clearButton">Clear Problem</button>
+    </div></form>
+    <br>
+    <div id = "hist">Problem History: </div>
+    <div id = "probDiv">(Math Problem Goes Here...)<br></div>
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        var $num1In = $("#num1In");
+        var $operIn = $("#operIn");
+        var $num2In = $("#num2In");
+        var $form = $("#form-div");
+        var $probTxt = $("#probDiv");
+        var $resBtn = $("#resButton");
+        var $histr = $("#hist");
+        var $clrBtn = $("#clearButton");
+        
+        var onSub = function() { //this function estimates the problem
+            event.preventDefault();
+            if (parseFloat($num1In.val()) === 0 || parseFloat($num2In.val()) === 0 && $operIn.val() === "divis") { //if the operation is division and you try to put in a 0 anywhere:
+                reset(); //reset the form
+                window.alert("Dividing with 0 doesn't work, nice try."); //give the user an error
+            } else if ($num1In.val() === "" || $num2In.val() === "") { //but then if at least one number value is empty:
+                reset(); //reset the form
+                window.alert("Sorry, you gotta input 2 numbers. That's just the rules."); //give the user an error
+            } else { //otherwise, if there's no errors;
+                $probTxt.text($num1In.val()); //changes the problem's text to the first number
+                var operStr; //this is the variable for the operation, turned into a string, and this variable will be used a sec, literaly
+                if ($operIn.val() === "addit") { //if the operation is addition:
+                    operStr = " + "; //set the value of operStr to the + sign
+                } else if ($operIn.val() === "subtr") { //but then if the operation is subtraction:
+                    operStr = " - "; //set the value of operStr to the - sign
+                } else if ($operIn.val() === "multi") { //but then if the operation is multiplication:
+                    operStr = " x "; //set the value of operStr to the multiplication sign
+                } else { //otherwise, the operation must be division, so:
+                    operStr = " / "; //set the value of operStr to the division sign
+                }
+                $probTxt.append(operStr); //now add the value of operStr to the problem
+                
+                $probTxt.append($num2In.val() + " = "); //and then add the second number to the problem
+                
+                var ans; //now make a variable containing the answer, used in a sec, literally, again.
+                if ($operIn.val() === "addit") { //if the operation is addition:
+                    ans = parseFloat(parseFloat($num1In.val()) + parseFloat($num2In.val())); //the answer equals the first number plus the second number
+                } else if ($operIn.val() === "subtr") { //but then if the operation is subtraction:
+                    ans = parseFloat(parseFloat($num1In.val()) - parseFloat($num2In.val())).toString(); //the answer equals the first number minus the second number
+                } else if ($operIn.val() === "multi") { //but then if the operation is multiplication:
+                    ans = parseFloat(parseFloat($num1In.val()) * parseFloat($num2In.val())).toString(); //the answer equals the first number times the second number
+                } else { //otherwise, the operation must be division, so:
+                    ans = parseFloat(parseFloat($num1In.val()) / parseFloat($num2In.val())).toString(); //the answer equals the first number divided by the second number
+                }
+                
+                $probTxt.append(ans); //finally, add the answer to the problem
+                $histr.append("<br>" + $num1In.val() + operStr + $num2In.val() + " = " + ans);
+            }
+        };
+        
+        var reset = function() { //this function just sets all the values to the defaults
+            $num1In.val("");
+            $operIn.val("addit");
+            $num2In.val("");
+        }
+        
+        var clear = function() {
+            $probTxt.text("(Math Problem Goes Here...)");
+        }
+        
+        $form.on("submit", onSub);
+        $resBtn.on("click", reset);
+        $clrBtn.on("click", clear);
+    </script>
+    </body>
+</html>
